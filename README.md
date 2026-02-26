@@ -1,6 +1,6 @@
 # nano-banana-mcp
 
-An MCP (Model Context Protocol) server for AI image generation using Google Gemini. Generate images from text prompts, edit existing images, or create styled headshots — all from VS Code agent mode, Claude Desktop, or any MCP client.
+An MCP (Model Context Protocol) server for AI image generation using Google Gemini. Generate images from text prompts and optionally provide reference images to inform the output. Use it from VS Code agent mode, Claude Desktop, or any MCP client.
 
 ## Quick start
 
@@ -9,42 +9,23 @@ npm install
 npm run build
 ```
 
-## Tools
+## Tool: `generate_image`
 
-| Tool | Description |
-|------|-------------|
-| `generate_image` | Generate an image from a text prompt (app icons, illustrations, designs, logos, concept art…) |
-| `edit_image` | Edit or transform an existing image with a text prompt (restyle, recolor, add elements…) |
-| `list_headshot_styles` | List preset headshot style options |
-| `generate_headshot` | Generate a styled portrait from a photo using a preset |
-
-### generate_image
+A single, flexible tool that handles all image generation — from scratch or informed by reference images.
 
 | Parameter | Required | Description |
 |-----------|----------|-------------|
-| `prompt` | ✅ | Detailed description of the image to generate |
+| `prompt` | ✅ | Text prompt describing what to generate or how to transform the input |
+| `images` | | Optional array of reference images (file paths, data URLs, or base64 strings) to inform the output |
 | `google_api_key` | | Google AI Studio API key (falls back to `GOOGLE_API_KEY` env var) |
 | `output_dir` | | Directory to save images; if omitted, returned inline |
 | `output_name` | | Filename prefix (default: `generated`) |
 
-### edit_image
+### Examples
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `image` | ✅ | File path, data URL, or raw base64 image data |
-| `prompt` | ✅ | Instructions for how to edit or transform the image |
-| `google_api_key` | | Google AI Studio API key |
-| `output_dir` | | Directory to save images |
-| `output_name` | | Filename prefix (default: `edited`) |
-
-### generate_headshot
-
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `image` | ✅ | File path, data URL, or raw base64 image data |
-| `style` | | Style preset (default: `professional`). Run `list_headshot_styles` for options. |
-| `google_api_key` | | Google AI Studio API key |
-| `output_dir` | | Directory to save images |
+- **From scratch:** `prompt: "A minimalist app icon for a weather app, flat design, blue gradient"`
+- **Edit an image:** `prompt: "Change the background to a sunset", images: ["./photo.jpg"]`
+- **Combine references:** `prompt: "Merge these two logo concepts into one", images: ["./logo1.png", "./logo2.png"]`
 
 ## VS Code configuration
 
@@ -67,11 +48,6 @@ Add to your `.vscode/settings.json` (or user settings):
 }
 ```
 
-Example prompts in agent mode:
-> Design a minimalist app icon for a weather app
-> Edit ~/logo.png to use a blue and purple gradient
-> Generate a cyberpunk headshot from ~/selfie.jpg
-
 ## Claude Desktop configuration
 
 Add to `claude_desktop_config.json`:
@@ -89,19 +65,6 @@ Add to `claude_desktop_config.json`:
   }
 }
 ```
-
-## Headshot style presets
-
-- 📸 **professional** — Polished corporate portrait
-- 🎬 **cinematic** — Dramatic movie lighting
-- 📰 **editorial** — Glossy magazine polish
-- 💎 **artdeco** — 1920s glamour
-- 🌿 **lifestyle** — Golden-hour outdoor
-- 🪄 **fantasy** — Regal fantasy portrait
-- 🎶 **80s** — Retro neon synthwave
-- 🌴 **vacation** — Tropical vibes
-- 🕰️ **1800s** — Oil-painted portrait
-- 🌌 **cyberpunk** — Holographic neon grit
 
 ## Development
 
