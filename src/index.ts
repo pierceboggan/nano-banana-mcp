@@ -8,7 +8,7 @@ import * as path from "node:path";
 
 // ── Gemini API helpers ───────────────────────────────────────────────────────
 
-const MODEL_NAME = "gemini-2.5-flash-preview-image-generation";
+const MODEL_NAME = "gemini-3.1-flash-image-preview";
 const GENERATE_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models";
 
 interface ContentPart {
