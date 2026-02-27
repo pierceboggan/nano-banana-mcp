@@ -1,18 +1,22 @@
 {
   "name": "nano-banana-mcp",
   "version": "1.0.0",
-  "description": "MCP server for generating AI headshots via Google Gemini",
+  "description": "MCP server for AI image generation via Google Gemini",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
     "nano-banana-mcp": "dist/index.js"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
+    "prepublishOnly": "npm run build",
     "start": "node dist/index.js",
     "dev": "tsx src/index.ts"
   },
-  "keywords": ["mcp", "headshot", "gemini", "ai"],
+  "keywords": ["mcp", "image-generation", "gemini", "ai", "model-context-protocol"],
   "author": "",
   "license": "ISC",
   "dependencies": {
